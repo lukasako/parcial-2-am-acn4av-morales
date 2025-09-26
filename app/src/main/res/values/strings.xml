@@ -6,4 +6,9 @@
     <string name="mes_actual">Septiembre</string>
     <string name="saldo_total">Saldo total</string>
     <string name="saldo_inicial">$2.500,22</string>
+    <!-- strings de botones -->
+    <string name="ingresar_gasto">Ingresar</string>
+    <string name="movimientos">Movimientos</string>
+    <string name="categorias">Categorías</string>
+    <string name="movimientos_fijos">Movimientos fijos</string>
 </resources>

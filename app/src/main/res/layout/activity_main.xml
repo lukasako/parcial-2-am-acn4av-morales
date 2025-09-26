@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_light">
@@ -9,30 +10,31 @@
     <!-- agrega logo -->
     <LinearLayout
         android:id="@+id/headerLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="401dp"
+        android:layout_height="146dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="@dimen/padding_medium"
-        android:gravity="center_horizontal"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imgLogo"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/ic_wallet"
+            android:layout_marginBottom="@dimen/padding_small"
             android:contentDescription="@string/app_name"
-            android:layout_marginBottom="@dimen/padding_small"/>
+            android:src="@drawable/ic_wallet" />
 
         <TextView
             android:id="@+id/tvGreeting"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="37dp"
             android:text="@string/hello"
-            android:textSize="@dimen/title_text"
-            android:textColor="@color/text_primary"/>
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/title_text" />
     </LinearLayout>
 
 
@@ -50,42 +52,45 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="391dp"
+            android:layout_height="209dp"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="@dimen/padding_medium"
-            android:gravity="center_horizontal">
+            android:padding="@dimen/padding_medium">
 
             <TextView
                 android:id="@+id/tvSaldoLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/saldo_total"
-                android:textColor="@color/text_secondary"/>
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/saldo_text" />
 
             <TextView
                 android:id="@+id/tvSaldoAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="@string/saldo_inicial"
-                android:textSize="@dimen/saldo_text"
                 android:textColor="@color/text_primary"
-                android:layout_marginTop="4dp"/>
+                android:textSize="@dimen/saldo_text" />
 
             <!-- Indicadores simples de mes -->
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_width="350dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="@dimen/padding_large"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/padding_small">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvActualMonth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/mes_actual"
-                    android:textColor="@color/text_secondary"/>
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/saldo_text" />
 
             </LinearLayout>
 
@@ -98,23 +103,82 @@
 
                 <TextView
                     android:id="@+id/tvMonthUp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="132dp"
+                    android:layout_height="45dp"
                     android:layout_marginEnd="16dp"
                     android:text="+ $124.500,01"
-                    android:textColor="@color/accent_green" />
+                    android:textColor="@color/accent_green"
+                    android:textSize="@dimen/title_text"/>
 
                 <TextView
                     android:id="@+id/tvMonthDown"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="133dp"
+                    android:layout_height="45dp"
                     android:text="- $55.470,55"
-                    android:textColor="@color/danger" />
+                    android:textColor="@color/danger"
+                    android:textSize="@dimen/title_text"/>
 
             </LinearLayout>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <!-- scroll de botones principales -->
+    <ScrollView
+        android:id="@+id/scrollMain"
+        android:layout_width="388dp"
+        android:layout_height="300dp"
+        android:layout_margin="@dimen/padding_medium"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardSaldo">
+
+        <LinearLayout
+            android:id="@+id/containerMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- botones -->
+            <Button
+                android:id="@+id/btnIngresar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginBottom="@dimen/padding_small"
+                android:background="@drawable/rounded_button"
+                android:text="@string/ingresar_gasto"
+                android:textColor="@color/button_text" />
+
+            <Button
+                android:id="@+id/btnMovimientos"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginBottom="@dimen/padding_small"
+                android:background="@drawable/rounded_button"
+                android:text="@string/movimientos"
+                android:textColor="@color/button_text" />
+
+            <Button
+                android:id="@+id/btnCategorias"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginBottom="@dimen/padding_small"
+                android:background="@drawable/rounded_button"
+                android:text="@string/categorias"
+                android:textColor="@color/button_text" />
+
+            <Button
+                android:id="@+id/btnMovFijos"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginBottom="@dimen/padding_small"
+                android:background="@drawable/rounded_button"
+                android:text="@string/movimientos_fijos"
+                android:textColor="@color/button_text" />
+        </LinearLayout>
+    </ScrollView>
 
 
     <!-- footer -->
