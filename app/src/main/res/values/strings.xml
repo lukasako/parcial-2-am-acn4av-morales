@@ -2,4 +2,8 @@
     <string name="app_name">GastApp</string>
     <!-- string saludo -->
     <string name="hello">Hola Lucas, ¿qué hiciste hoy?</string>
+    <!-- strings de saldos -->
+    <string name="mes_actual">Septiembre</string>
+    <string name="saldo_total">Saldo total</string>
+    <string name="saldo_inicial">$2.500,22</string>
 </resources>
