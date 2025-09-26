@@ -2,23 +2,46 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_light">
 
-    <!-- agrega logo -->
+    <!-- nav con logo de la app -->
+
+
+    <!-- agrega imagen billetera -->
+
+
+    <!-- parte que muestra saldos -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        style="@style/Widget.GastApp.Toolbar"
+        android:layout_width="0dp"
+        android:layout_height="73dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgNavLogo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/gastapp_icon" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="401dp"
         android:layout_height="146dp"
-        android:layout_marginTop="32dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="@dimen/padding_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/topAppBar">
 
         <ImageView
             android:id="@+id/imgLogo"
@@ -37,23 +60,21 @@
             android:textSize="@dimen/title_text" />
     </LinearLayout>
 
-
-    <!-- parte que muestra saldos -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardSaldo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="2dp"
+        android:layout_width="365dp"
+        android:layout_height="202dp"
         android:layout_marginStart="@dimen/padding_medium"
         android:layout_marginEnd="@dimen/padding_medium"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/headerLayout">
 
         <LinearLayout
-            android:layout_width="391dp"
-            android:layout_height="209dp"
+            android:layout_width="363dp"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="@dimen/padding_medium">
@@ -106,17 +127,17 @@
                     android:layout_width="132dp"
                     android:layout_height="45dp"
                     android:layout_marginEnd="16dp"
-                    android:text="+ $124.500,01"
+                    android:text="@string/saldo_mes_ingreso"
                     android:textColor="@color/accent_green"
-                    android:textSize="@dimen/title_text"/>
+                    android:textSize="@dimen/title_text" />
 
                 <TextView
                     android:id="@+id/tvMonthDown"
                     android:layout_width="133dp"
                     android:layout_height="45dp"
-                    android:text="- $55.470,55"
+                    android:text="@string/saldo_mes_egreso"
                     android:textColor="@color/danger"
-                    android:textSize="@dimen/title_text"/>
+                    android:textSize="@dimen/title_text" />
 
             </LinearLayout>
 
@@ -124,16 +145,21 @@
     </androidx.cardview.widget.CardView>
 
     <!-- scroll de botones principales -->
+
+
+    <!-- footer -->
     <ScrollView
         android:id="@+id/scrollMain"
-        android:layout_width="388dp"
-        android:layout_height="300dp"
+        android:layout_width="341dp"
+        android:layout_height="242dp"
         android:layout_margin="@dimen/padding_medium"
         android:layout_marginTop="32dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardSaldo">
+        app:layout_constraintTop_toBottomOf="@id/cardSaldo"
+        app:layout_constraintVertical_bias="0.263">
 
         <LinearLayout
             android:id="@+id/containerMain"
@@ -180,8 +206,6 @@
         </LinearLayout>
     </ScrollView>
 
-
-    <!-- footer -->
     <LinearLayout
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
@@ -201,7 +225,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_home"
             android:background="@android:color/transparent"
-            android:contentDescription="Home"
+            android:contentDescription="@string/app_name"
             app:tint="@color/button_text"/>
 
         <!-- aca boton de cuentas -->
@@ -212,7 +236,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_bank"
             android:background="@android:color/transparent"
-            android:contentDescription="Summary"
+            android:contentDescription="@string/descripcion_cuentas"
             app:tint="@color/button_text"/>
     </LinearLayout>
 
