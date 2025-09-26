@@ -36,6 +36,86 @@
     </LinearLayout>
 
 
+    <!-- parte que muestra saldos -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardSaldo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        android:layout_marginStart="@dimen/padding_medium"
+        android:layout_marginEnd="@dimen/padding_medium"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_medium"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/tvSaldoLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/saldo_total"
+                android:textColor="@color/text_secondary"/>
+
+            <TextView
+                android:id="@+id/tvSaldoAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/saldo_inicial"
+                android:textSize="@dimen/saldo_text"
+                android:textColor="@color/text_primary"
+                android:layout_marginTop="4dp"/>
+
+            <!-- Indicadores simples de mes -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/padding_small">
+
+                <TextView
+                    android:id="@+id/tvActualMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mes_actual"
+                    android:textColor="@color/text_secondary"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/padding_small"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvMonthUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="+ $124.500,01"
+                    android:textColor="@color/accent_green" />
+
+                <TextView
+                    android:id="@+id/tvMonthDown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="- $55.470,55"
+                    android:textColor="@color/danger" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 
     <!-- footer -->
     <LinearLayout
