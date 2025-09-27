@@ -12,9 +12,9 @@
     <!-- strings de saldos -->
     <string name="mes_actual">Septiembre</string>
     <string name="saldo_total">Saldo total</string>
-    <string name="saldo_inicial">$2.500,22</string>
+    <string name="saldo_inicial">99000</string>
     <string name="saldo_mes_ingreso">+ $120.500,22</string>
-    <string name="saldo_mes_egreso">+ $50.500,22</string>
+    <string name="saldo_mes_egreso">- $50.500,22</string>
     <!-- strings de botones -->
     <string name="ingresar_gasto">Ingresar</string>
     <string name="movimientos">Movimientos</string>

@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/bg_light">
 
-    <!-- nav con logo de la app -->
-
-
-    <!-- agrega imagen billetera -->
-
-
-    <!-- parte que muestra saldos -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
         style="@style/Widget.GastApp.Toolbar"
@@ -143,9 +136,6 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-    <!-- scroll de botones principales -->
-
 
     <!-- footer -->
     <ScrollView
