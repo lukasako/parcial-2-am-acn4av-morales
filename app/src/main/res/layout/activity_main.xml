@@ -55,7 +55,7 @@
             android:id="@+id/tvGreeting"
             android:layout_width="wrap_content"
             android:layout_height="37dp"
-            android:text="@string/hello"
+            android:text="@string/default_greeting"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/title_text" />
     </LinearLayout>
@@ -96,7 +96,7 @@
                 android:textColor="@color/text_primary"
                 android:textSize="@dimen/saldo_text" />
 
-            <!-- Indicadores simples de mes -->
+            <!-- indicadores -->
 
             <LinearLayout
                 android:layout_width="350dp"

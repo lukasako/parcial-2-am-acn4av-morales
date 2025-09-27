@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">GastApp</string>
-    <!-- string saludo -->
-    <string name="hello">Hola Lucas, ¿qué hiciste hoy?</string>
+    <!-- reemplazo el string de saludo por un array con saludos distintos -->
+    <string name="default_greeting">Hola Lucas, ¿cómo estás?</string>
+    <string-array name="greetings">
+        <item>Hola Lucas, ¿pediste delivery?</item>
+        <item>Hola Lucas, ¿compraste algo?</item>
+        <item>Hola Lucas, ¿renovaste netflix?</item>
+        <item>Hola Lucas, ¿te diste un gustito hoy?</item>
+        <item>Hola Lucas, ¿te tomaste un uber?</item>
+    </string-array>
     <!-- strings de saldos -->
     <string name="mes_actual">Septiembre</string>
     <string name="saldo_total">Saldo total</string>
