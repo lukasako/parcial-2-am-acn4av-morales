@@ -21,4 +21,6 @@
     <string name="categorias">Categorías</string>
     <string name="movimientos_fijos">Movimientos fijos</string>
     <string name="descripcion_cuentas">Mis cuentas</string>
+    <string name="ver_todos">Ver Todos</string>
+    <string name="titulo_utlimos_gastos">Ultimos Gastos</string>
 </resources>
