@@ -163,24 +163,19 @@
 
     <ScrollView
         android:id="@+id/scrollMain"
-        android:layout_width="341dp"
-        android:layout_height="242dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_margin="@dimen/padding_medium"
-        android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardSaldo"
-        app:layout_constraintVertical_bias="0.263">
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:id="@+id/containerMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <!-- botones -->
             <Button
                 android:id="@+id/btnIngresar"
                 android:layout_width="match_parent"
@@ -216,6 +211,36 @@
                 android:background="@drawable/rounded_button"
                 android:text="@string/movimientos_fijos"
                 android:textColor="@color/button_text" />
+
+            <!-- lista dinnamica de gastos -->
+            <TextView
+                android:id="@+id/tvUltimosMovimientos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/titulo_utlimos_gastos"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout
+                android:id="@+id/llRecentList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+
+            <!-- Botón Ver todos -->
+            <Button
+                android:id="@+id/btnVerTodos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ver_todos"
+                android:textColor="@color/primary_blue"
+                android:background="@android:color/transparent"
+                android:layout_gravity="center"
+                android:padding="8dp"
+                android:visibility="gone"/>
+
         </LinearLayout>
     </ScrollView>
 
