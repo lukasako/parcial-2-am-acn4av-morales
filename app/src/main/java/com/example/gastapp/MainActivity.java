@@ -69,6 +69,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, MisMovimientosActivity.class);
             startActivity(intent);
         });
+
+        Button btnCategorias = findViewById(R.id.btnCategorias);
+        btnCategorias.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CategoriasActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void toggleCardView() {
