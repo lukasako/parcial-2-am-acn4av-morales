@@ -24,7 +24,7 @@ public class CategoriasActivity extends AppCompatActivity {
         llCategoriasList = findViewById(R.id.llCategoriasList);
         Button btnAgregar = findViewById(R.id.btnAgregarCategoria);
 
-        // 🔧 Ajuste pendiente: habilitar botón para agregar categoría
+        //ajuste pendiente: habilitar botón para agregar categoría
         btnAgregar.setOnClickListener(v ->
                 startActivityForResult(new Intent(this, AgregarCategoriaActivity.class), REQ_ADD_CAT)
         );
@@ -66,14 +66,14 @@ public class CategoriasActivity extends AppCompatActivity {
         String newName = data.getStringExtra("name");
 
         if (requestCode == REQ_ADD_CAT) {
-            // ➕ Agregar categoría nueva
+            //agregar categoría nueva
             if (newName != null && !newName.isEmpty()) {
                 addCategoriaItem(newName);
             }
         }
 
         if (requestCode == REQ_EDIT_CAT) {
-            // ✏️ Editar categoría existente
+            //Editar categoría existente
             for (int i = 0; i < llCategoriasList.getChildCount(); i++) {
                 View item = llCategoriasList.getChildAt(i);
 
