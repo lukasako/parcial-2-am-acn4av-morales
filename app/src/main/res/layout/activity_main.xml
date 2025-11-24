@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_light">
@@ -11,10 +12,12 @@
         style="@style/Widget.GastApp.Toolbar"
         android:layout_width="0dp"
         android:layout_height="73dp"
+        app:layout_constraintBottom_toTopOf="@+id/headerLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
 
         <ImageView
             android:id="@+id/imgNavLogo"
@@ -23,6 +26,16 @@
             android:layout_gravity="center"
             android:contentDescription="@string/app_name"
             android:src="@drawable/gastapp_icon" />
+
+        <ImageButton
+            android:id="@+id/btnLogout"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:src="@drawable/ic_logout"
+            app:tint="@color/button_text" />
     </com.google.android.material.appbar.MaterialToolbar>
 
     <LinearLayout
@@ -47,7 +60,7 @@
         <TextView
             android:id="@+id/tvGreeting"
             android:layout_width="wrap_content"
-            android:layout_height="37dp"
+            android:layout_height="wrap_content"
             android:text="@string/default_greeting"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/title_text" />
@@ -69,8 +82,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_medium">
-
-            <!-- grafico oculto hasta tocar en saldo -->
 
             <LinearLayout
                 android:id="@+id/layoutSaldo"
@@ -98,8 +109,6 @@
                     android:textSize="@dimen/saldo_text"
                     android:textStyle="bold" />
 
-                <!-- indicadores -->
-
                 <LinearLayout
                     android:layout_width="350dp"
                     android:layout_height="37dp"
@@ -114,7 +123,6 @@
                         android:text="@string/mes_actual"
                         android:textColor="@color/text_secondary"
                         android:textSize="@dimen/saldo_text" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -135,13 +143,13 @@
 
                     <TextView
                         android:id="@+id/tvMonthDown"
-                        android:layout_width="133dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="45dp"
                         android:text="@string/saldo_mes_egreso"
                         android:textColor="@color/danger"
                         android:textSize="@dimen/title_text" />
-
                 </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -157,9 +165,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp" />
             </LinearLayout>
+
         </FrameLayout>
     </androidx.cardview.widget.CardView>
-
 
     <ScrollView
         android:id="@+id/scrollMain"
@@ -177,7 +185,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- botones -->
             <Button
                 android:id="@+id/btnIngresar"
                 android:layout_width="match_parent"
@@ -214,7 +221,6 @@
                 android:text="@string/movimientos_fijos"
                 android:textColor="@color/button_text" />
 
-            <!--  seccion ultimos movimientos -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -251,7 +257,6 @@
         </LinearLayout>
     </ScrollView>
 
-
     <LinearLayout
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
@@ -263,7 +268,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- aca boton de home -->
         <ImageButton
             android:id="@+id/navHome"
             android:layout_width="0dp"
@@ -274,7 +278,6 @@
             android:contentDescription="@string/app_name"
             app:tint="@color/button_text"/>
 
-        <!-- aca boton de cuentas -->
         <ImageButton
             android:id="@+id/navSummary"
             android:layout_width="0dp"

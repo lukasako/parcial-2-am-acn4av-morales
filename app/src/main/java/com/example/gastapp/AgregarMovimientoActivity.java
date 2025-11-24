@@ -3,24 +3,21 @@ package com.example.gastapp;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import com.example.gastapp.models.Movimiento;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -59,24 +56,23 @@ public class AgregarMovimientoActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        // fecha por defecto
         Calendar c = Calendar.getInstance();
         String fechaHoy = String.format(Locale.getDefault(), "%02d/%02d/%02d",
-                c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH) + 1, c.get(Calendar.YEAR)%100);
+                c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH) + 1, c.get(Calendar.YEAR) % 100);
         etFechaAdd.setText(fechaHoy);
 
         etFechaAdd.setOnClickListener(v -> {
             Calendar now = Calendar.getInstance();
             DatePickerDialog dp = new DatePickerDialog(this,
                     (view, year, month, dayOfMonth) -> {
-                        String f = String.format(Locale.getDefault(), "%02d/%02d/%02d", dayOfMonth, month+1, year%100);
+                        String f = String.format(Locale.getDefault(), "%02d/%02d/%02d",
+                                dayOfMonth, month + 1, year % 100);
                         etFechaAdd.setText(f);
                     },
                     now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
             dp.show();
         });
 
-        // cargar categorias y cuentas para el AutoCompleteTextView
         loadCategorias();
         loadCuentas();
 
@@ -100,7 +96,6 @@ public class AgregarMovimientoActivity extends AppCompatActivity {
                 return;
             }
 
-            // resolver categoriaId y medioPagoId seleccionados por nombre (si hay)
             String selectedCatName = actvCategoria.getText().toString().trim();
             String selectedCatId = null;
             if (!selectedCatName.isEmpty()) {
@@ -115,7 +110,18 @@ public class AgregarMovimientoActivity extends AppCompatActivity {
                 if (idx2 >= 0) selectedCuentaId = cuentasIds.get(idx2);
             }
 
-            Movimiento m = new Movimiento(nombre, monto, selectedCatId, selectedCuentaId, fecha, esIngreso, esFijo, null);
+            Integer dia = esFijo ? 1 : null;
+            Movimiento m = new Movimiento(
+                    nombre,
+                    monto,
+                    selectedCatId,
+                    selectedCuentaId,
+                    fecha,
+                    esIngreso,
+                    esFijo,
+                    dia
+            );
+            m.setCreatedAt(new Date());
 
             db.collection("usuarios").document(uid).collection("movimientos")
                     .add(m)
@@ -124,7 +130,8 @@ public class AgregarMovimientoActivity extends AppCompatActivity {
                         setResult(RESULT_OK);
                         finish();
                     })
-                    .addOnFailureListener(err -> Toast.makeText(this, "Error: " + err.getMessage(), Toast.LENGTH_SHORT).show());
+                    .addOnFailureListener(err -> Toast.makeText(this,
+                            "Error: " + err.getMessage(), Toast.LENGTH_SHORT).show());
         });
     }
 
@@ -136,10 +143,10 @@ public class AgregarMovimientoActivity extends AppCompatActivity {
                     categoriasNombres.clear();
                     for (DocumentSnapshot d : qs.getDocuments()) {
                         categoriasIds.add(d.getId());
-                        String nombre = d.getString("nombre");
-                        categoriasNombres.add(nombre != null ? nombre : "Sin nombre");
+                        categoriasNombres.add(d.getString("nombre"));
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, categoriasNombres);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                            android.R.layout.simple_dropdown_item_1line, categoriasNombres);
                     actvCategoria.setAdapter(adapter);
                 });
     }
@@ -152,10 +159,10 @@ public class AgregarMovimientoActivity extends AppCompatActivity {
                     cuentasNombres.clear();
                     for (DocumentSnapshot d : qs.getDocuments()) {
                         cuentasIds.add(d.getId());
-                        String nombre = d.getString("nombre");
-                        cuentasNombres.add(nombre != null ? nombre : "Sin nombre");
+                        cuentasNombres.add(d.getString("nombre"));
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, cuentasNombres);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                            android.R.layout.simple_dropdown_item_1line, cuentasNombres);
                     actvMedioPago.setAdapter(adapter);
                 });
     }

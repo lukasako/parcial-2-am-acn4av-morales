@@ -1,11 +1,13 @@
 package com.example.gastapp.models;
 
-import com.google.firebase.firestore.ServerTimestamp;
+import androidx.annotation.Nullable;
 
+import com.google.firebase.firestore.ServerTimestamp;
 import java.io.Serializable;
 import java.util.Date;
 
 public class Movimiento implements Serializable {
+
     private String id;
     private String titulo;
     private double monto;
@@ -14,14 +16,19 @@ public class Movimiento implements Serializable {
     private String fecha;
     private boolean esIngreso;
     private boolean esFijo;
-    private Integer diaMovimientoFijo;
+
+    @Nullable
+    private Integer diaMovimientoFijo; // puede ser null
+
     @ServerTimestamp
     private Date createdAt;
 
-    public Movimiento() {}
+    public Movimiento() {} // necesario Firestore
 
     public Movimiento(String titulo, double monto, String categoriaId, String medioPagoId,
-                      String fecha, boolean esIngreso, boolean esFijo, Integer diaMovimientoFijo) {
+                      String fecha, boolean esIngreso, boolean esFijo,
+                      @Nullable Integer diaMovimientoFijo) {
+
         this.titulo = titulo;
         this.monto = monto;
         this.categoriaId = categoriaId;
@@ -29,10 +36,11 @@ public class Movimiento implements Serializable {
         this.fecha = fecha;
         this.esIngreso = esIngreso;
         this.esFijo = esFijo;
-        this.diaMovimientoFijo = diaMovimientoFijo;
+
+        this.diaMovimientoFijo = esFijo ? diaMovimientoFijo : null;
     }
 
-    // getters / setters
+    // getters & setters...
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
     public String getTitulo() { return titulo; }
@@ -50,7 +58,7 @@ public class Movimiento implements Serializable {
     public boolean isEsFijo() { return esFijo; }
     public void setEsFijo(boolean esFijo) { this.esFijo = esFijo; }
     public Integer getDiaMovimientoFijo() { return diaMovimientoFijo; }
-    public void setDiaMovimientoFijo(Integer diaMovimientoFijo) { this.diaMovimientoFijo = diaMovimientoFijo; }
+    public void setDiaMovimientoFijo(Integer i) { this.diaMovimientoFijo = i; }
     public Date getCreatedAt() { return createdAt; }
     public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 }

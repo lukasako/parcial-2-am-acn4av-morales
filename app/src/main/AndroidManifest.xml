@@ -33,6 +33,8 @@
         <activity android:name=".MisCuentasActivity" />
         <activity android:name=".AgregarCuentaActivity" />
         <activity android:name=".EditarCuentaActivity" />
+        <activity android:name=".MovimientosFijosActivity" />
+
 
 
 
