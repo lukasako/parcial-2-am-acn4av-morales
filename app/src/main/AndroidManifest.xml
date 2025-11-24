@@ -30,6 +30,10 @@
         <activity android:name=".AgregarMovimientoActivity" />
         <activity android:name=".EditarMovimientoActivity" />
         <activity android:name=".MisMovimientosActivity" />
+        <activity android:name=".MisCuentasActivity" />
+        <activity android:name=".AgregarCuentaActivity" />
+        <activity android:name=".EditarCuentaActivity" />
+
 
 
     </application>

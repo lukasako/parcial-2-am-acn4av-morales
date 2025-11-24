@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_light"
+    android:paddingVertical="20dp">
+
+    <!-- Nombre y monto -->
+    <TextView
+        android:id="@+id/tvNombreCuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Banco Nación"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/primary_blue"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/tvMontoCuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$25.300"
+        android:textColor="@color/accent_green"
+        android:textSize="18sp"
+        android:layout_marginTop="4dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <!-- Íconos editar/borrar -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp">
+
+        <ImageView
+            android:id="@+id/ivDeleteCuenta"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_delete"
+            android:tint="@color/danger"
+            android:contentDescription="Eliminar"/>
+
+        <ImageView
+            android:id="@+id/ivEditCuenta"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_edit"
+            android:tint="@color/danger"
+            android:contentDescription="Editar"/>
+
+    </LinearLayout>
+
+    <!-- Separador gris -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="#E4E4E4"/>
+</LinearLayout>

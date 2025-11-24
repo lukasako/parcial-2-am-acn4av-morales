@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -75,6 +76,15 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, CategoriasActivity.class);
             startActivity(intent);
         });
+
+        //boton de banco redirige a mis cuentas
+        ImageButton navSummary = findViewById(R.id.navSummary);
+
+        navSummary.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, MisCuentasActivity.class);
+            startActivity(i);
+        });
+
     }
 
     private void toggleCardView() {
