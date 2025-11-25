@@ -47,6 +47,7 @@ public class MisMovimientosActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbarMovimientos);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationOnClickListener(v -> finish());
 
         llMovimientosList = findViewById(R.id.llMovimientosList);

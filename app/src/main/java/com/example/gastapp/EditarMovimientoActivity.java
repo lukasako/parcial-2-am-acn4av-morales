@@ -2,10 +2,8 @@ package com.example.gastapp;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,7 +12,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.gastapp.models.Movimiento;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -28,7 +25,6 @@ public class EditarMovimientoActivity extends AppCompatActivity {
     private String docId;
     private String uid;
 
-    // Si preferís AutoComplete para elegir categoria/cuenta:
     private AutoCompleteTextView actvCategoriaEdit, actvMedioPagoEdit;
     private List<String> categoriasIds = new ArrayList<>();
     private List<String> categoriasNombres = new ArrayList<>();
@@ -42,9 +38,9 @@ public class EditarMovimientoActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbarEditarMov);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // optional: if you want to use AutoComplete replace xml components accordingly.
         etCategoria = findViewById(R.id.etCategoria);
         etNombre = findViewById(R.id.etNombre);
         etMedioPago = findViewById(R.id.etMedioPago);

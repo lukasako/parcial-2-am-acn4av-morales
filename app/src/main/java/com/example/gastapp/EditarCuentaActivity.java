@@ -28,6 +28,7 @@ public class EditarCuentaActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbarEditarCuenta);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationOnClickListener(v -> finish());
 
         etNombreCuentaEdit = findViewById(R.id.etNombreCuentaEdit);

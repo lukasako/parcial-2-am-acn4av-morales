@@ -31,6 +31,7 @@ public class AgregarCategoriaActivity extends AppCompatActivity {
 
         MaterialToolbar toolbar = findViewById(R.id.toolbarEditarCategoria);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationOnClickListener(v -> finish());
 
         etCategoria = findViewById(R.id.etCategoriaNombre);

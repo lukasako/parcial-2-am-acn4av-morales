@@ -41,6 +41,7 @@ public class MisCuentasActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbarMisCuentas);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationOnClickListener(v -> finish());
 
         llListaCuentas = findViewById(R.id.llListaCuentas);

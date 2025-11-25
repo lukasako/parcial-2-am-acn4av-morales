@@ -31,6 +31,7 @@ public class AgregarCuentaActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbarAgregarCuenta);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationOnClickListener(v -> finish());
 
         etNombreCuentaAdd = findViewById(R.id.etNombreCuentaAdd);

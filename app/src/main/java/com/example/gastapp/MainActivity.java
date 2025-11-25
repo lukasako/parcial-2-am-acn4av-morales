@@ -3,7 +3,6 @@ package com.example.gastapp;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -33,10 +32,13 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private boolean showingSaldo = true;
+
     private LinearLayout layoutSaldo;
     private LinearLayout layoutGrafico;
     private LinearLayout llRecentList;
+
     private PieChart pieChart;
+
     private FirebaseFirestore db;
     private FirebaseUser currentUser;
     private String uid;
@@ -61,15 +63,17 @@ public class MainActivity extends AppCompatActivity {
         TextView tvSaldoAmount = findViewById(R.id.tvSaldoAmount);
         ImageView imgLogo = findViewById(R.id.imgLogo);
         CardView cardSaldo = findViewById(R.id.cardSaldo);
+
         layoutSaldo = findViewById(R.id.layoutSaldo);
         layoutGrafico = findViewById(R.id.layoutGrafico);
         pieChart = findViewById(R.id.pieChart);
         llRecentList = findViewById(R.id.llRecentList);
+
         ImageButton btnLogout = findViewById(R.id.btnLogout);
         ImageButton navSummary = findViewById(R.id.navSummary);
 
         setupGreeting(tvGreeting);
-        cargarSaldo(tvSaldoAmount, imgLogo);
+
         cardSaldo.setOnClickListener(v -> toggleCardView());
         btnLogout.setOnClickListener(v -> logout());
         navSummary.setOnClickListener(v -> startActivity(new Intent(this, MisCuentasActivity.class)));
@@ -85,25 +89,29 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btnMovFijos).setOnClickListener(v ->
                 startActivity(new Intent(this, MovimientosFijosActivity.class)));
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        TextView tvSaldoAmount = findViewById(R.id.tvSaldoAmount);
+        ImageView imgLogo = findViewById(R.id.imgLogo);
+
+        cargarSaldo(tvSaldoAmount, imgLogo);
         cargarUltimosMovimientos();
         cargarEstadisticaMensual();
     }
 
     private void setupGreeting(TextView tvGreeting) {
         String[] greetings = getResources().getStringArray(R.array.greetings);
-        int randIndex = (int) (Math.random() * greetings.length);
-        String saludoRandom = greetings[randIndex];
+        String saludoRandom = greetings[(int) (Math.random() * greetings.length)];
 
         db.collection("usuarios").document(uid)
                 .get()
                 .addOnSuccessListener(doc -> {
                     String nombre = doc.getString("nombre");
-                    if (nombre != null && !nombre.isEmpty()) {
-                        tvGreeting.setText(nombre + saludoRandom);
-                    } else {
-                        tvGreeting.setText("Usuario" + saludoRandom);
-                    }
+                    tvGreeting.setText((nombre != null ? nombre : "Usuario") + saludoRandom);
                 });
     }
 
@@ -128,33 +136,29 @@ public class MainActivity extends AppCompatActivity {
                 .addOnSuccessListener(qsCuentas -> {
                     double baseSaldo = 0;
                     for (DocumentSnapshot d : qsCuentas) {
-                        Double valorInicial = d.getDouble("valorInicial");
-                        if (valorInicial != null) {
-                            baseSaldo += valorInicial;
-                        }
+                        Double valor = d.getDouble("valorInicial");
+                        if (valor != null) baseSaldo += valor;
                     }
 
                     double finalBaseSaldo = baseSaldo;
+
                     db.collection("usuarios")
                             .document(uid)
                             .collection("movimientos")
                             .get()
                             .addOnSuccessListener(qsMovs -> {
-                                double totalIngresos = 0;
-                                double totalEgresos = 0;
+                                double ingresos = 0;
+                                double egresos = 0;
 
                                 for (DocumentSnapshot doc : qsMovs) {
                                     boolean ingreso = Boolean.TRUE.equals(doc.getBoolean("esIngreso"));
                                     double monto = doc.getDouble("monto") != null ? doc.getDouble("monto") : 0;
 
-                                    if (ingreso) {
-                                        totalIngresos += monto;
-                                    } else {
-                                        totalEgresos += monto;
-                                    }
+                                    if (ingreso) ingresos += monto;
+                                    else egresos += monto;
                                 }
 
-                                double total = finalBaseSaldo + totalIngresos - totalEgresos;
+                                double total = finalBaseSaldo + ingresos - egresos;
 
                                 NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("es", "AR"));
                                 saldoText.setText(nf.format(total));
@@ -192,13 +196,13 @@ public class MainActivity extends AppCompatActivity {
     private void addExpenseItem(String titulo, double monto, String categoriaId, String fecha,
                                 String medioPagoId, Boolean esIngreso) {
 
-        View itemView = getLayoutInflater().inflate(R.layout.item_movimiento, llRecentList, false);
+        View item = getLayoutInflater().inflate(R.layout.item_movimiento, llRecentList, false);
 
-        TextView tvTitulo = itemView.findViewById(R.id.tvTitulo);
-        TextView tvMonto = itemView.findViewById(R.id.tvMonto);
-        TextView tvCategoria = itemView.findViewById(R.id.tvCategoria);
-        TextView tvFecha = itemView.findViewById(R.id.tvFecha);
-        TextView tvMedioPago = itemView.findViewById(R.id.tvMedioPago);
+        TextView tvTitulo = item.findViewById(R.id.tvTitulo);
+        TextView tvMonto = item.findViewById(R.id.tvMonto);
+        TextView tvCategoria = item.findViewById(R.id.tvCategoria);
+        TextView tvFecha = item.findViewById(R.id.tvFecha);
+        TextView tvMedioPago = item.findViewById(R.id.tvMedioPago);
 
         tvTitulo.setText(titulo);
         tvFecha.setText(fecha);
@@ -213,25 +217,25 @@ public class MainActivity extends AppCompatActivity {
                 .collection("categorias")
                 .document(categoriaId)
                 .get()
-                .addOnSuccessListener(cat -> tvCategoria.setText(cat.getString("nombre")));
+                .addOnSuccessListener(doc -> tvCategoria.setText(doc.getString("nombre")));
 
         db.collection("usuarios").document(uid)
                 .collection("cuentas")
                 .document(medioPagoId)
                 .get()
-                .addOnSuccessListener(mp -> tvMedioPago.setText(mp.getString("nombre")));
+                .addOnSuccessListener(doc -> tvMedioPago.setText(doc.getString("nombre")));
 
-        llRecentList.addView(itemView);
+        llRecentList.addView(item);
     }
 
     private void cargarEstadisticaMensual() {
-        Calendar calendar = Calendar.getInstance();
+        Calendar c = Calendar.getInstance();
 
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        Timestamp inicioMes = new Timestamp(calendar.getTime());
+        c.set(Calendar.DAY_OF_MONTH, 1);
+        Timestamp inicioMes = new Timestamp(c.getTime());
 
-        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-        Timestamp finMes = new Timestamp(calendar.getTime());
+        c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+        Timestamp finMes = new Timestamp(c.getTime());
 
         db.collection("usuarios")
                 .document(uid)
@@ -240,47 +244,39 @@ public class MainActivity extends AppCompatActivity {
                 .whereLessThanOrEqualTo("createdAt", finMes)
                 .get()
                 .addOnSuccessListener(qs -> {
-                    double totalIngresos = 0;
-                    double totalEgresos = 0;
+                    double ingresos = 0;
+                    double egresos = 0;
 
                     for (DocumentSnapshot d : qs) {
                         boolean esIngreso = Boolean.TRUE.equals(d.getBoolean("esIngreso"));
                         double monto = d.getDouble("monto") != null ? d.getDouble("monto") : 0;
 
-                        if (esIngreso) {
-                            totalIngresos += monto;
-                        } else {
-                            totalEgresos += monto;
-                        }
+                        if (esIngreso) ingresos += monto;
+                        else egresos += monto;
                     }
 
                     NumberFormat f = NumberFormat.getCurrencyInstance(new Locale("es", "AR"));
 
-                    TextView tvMonthUp = findViewById(R.id.tvMonthUp);
-                    TextView tvMonthDown = findViewById(R.id.tvMonthDown);
-                    TextView tvActualMonth = findViewById(R.id.tvActualMonth);
+                    TextView tvUp = findViewById(R.id.tvMonthUp);
+                    TextView tvDown = findViewById(R.id.tvMonthDown);
+                    TextView tvActual = findViewById(R.id.tvActualMonth);
 
-                    tvMonthUp.setText(f.format(totalIngresos));
-                    tvMonthDown.setText(f.format(totalEgresos));
+                    tvUp.setText(f.format(ingresos));
+                    tvDown.setText(f.format(egresos));
 
                     String nombreMes = new SimpleDateFormat("MMMM yyyy", new Locale("es", "AR"))
                             .format(Calendar.getInstance().getTime());
-                    tvActualMonth.setText(
-                            nombreMes.substring(0, 1).toUpperCase() + nombreMes.substring(1)
-                    );
+                    tvActual.setText(nombreMes.substring(0, 1).toUpperCase() + nombreMes.substring(1));
 
-                    actualizarPieChart(totalIngresos, totalEgresos);
+                    actualizarPieChart(ingresos, egresos);
                 });
     }
 
     private void actualizarPieChart(double ingresos, double egresos) {
         ArrayList<PieEntry> entries = new ArrayList<>();
-        if (ingresos > 0) {
-            entries.add(new PieEntry((float) ingresos, "Ingresos"));
-        }
-        if (egresos > 0) {
-            entries.add(new PieEntry((float) egresos, "Egresos"));
-        }
+
+        if (ingresos > 0) entries.add(new PieEntry((float) ingresos, "Ingresos"));
+        if (egresos > 0) entries.add(new PieEntry((float) egresos, "Egresos"));
 
         PieDataSet dataSet = new PieDataSet(entries, "");
         dataSet.setColors(
@@ -289,9 +285,9 @@ public class MainActivity extends AppCompatActivity {
         );
         dataSet.setValueTextSize(12f);
 
-        PieData pieData = new PieData(dataSet);
+        PieData data = new PieData(dataSet);
         pieChart.setUsePercentValues(false);
-        pieChart.setData(pieData);
+        pieChart.setData(data);
         pieChart.getDescription().setEnabled(false);
         pieChart.getLegend().setEnabled(true);
         pieChart.invalidate();
