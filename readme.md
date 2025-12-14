@@ -1,7 +1,7 @@
 # GastApp - Control de Gastos Personales
 
 GastApp es una aplicación móvil desarrollada para permitir a los usuarios administrar de manera simple y visual sus ingresos, egresos, movimientos fijos y categorías personalizadas.
-Este trabajo corresponde al segundo parcial de la materia Aplicaciones Móviles, incorporando ahora login con Firebase, Firestore para persistencia de datos y todas las pantallas funcionales del sistema.
+Este trabajo corresponde al final de la materia Aplicaciones Móviles, incorporando ahora login con Firebase, Firestore para persistencia de datos y todas las pantallas funcionales del sistema.
 
 ---
 
